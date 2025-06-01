@@ -111,7 +111,7 @@ console.log(dogs[0]);  // 담비
 console.log("==============")
 
 
-// 3. Function : 추후에 설명
+// 3. Function : 10_funcion.js 참고
 
 
 /** static typing : 변수를 선언할 때 어떤 타입의 변수를 선언할지 명시하는 코딩 */
