@@ -20,7 +20,4 @@ function runner(){
 
 runner();
 
-// asdfsadfsadfasdf
-
-
 
