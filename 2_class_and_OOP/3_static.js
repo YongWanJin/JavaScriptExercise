@@ -1,5 +1,5 @@
 
-// static : 
+// static : 객체가 아니라 클래스 자체에 귀속되는 것들
 
 class IdolModel{
     name;
