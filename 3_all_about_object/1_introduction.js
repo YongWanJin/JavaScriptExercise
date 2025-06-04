@@ -11,6 +11,7 @@ const yujin = {
 }
 
 console.log(yujin);
+console.log(typeof yujin);
 
 
 // 2) class를 인스턴스화해서 생성
@@ -25,7 +26,10 @@ class IdolModel{
     }
 }
 
-console.log(new IdolModel('안유진', 2003));
+const yujin2 = new IdolModel('안유진', 2003)
+
+console.log(yujin2);
+console.log(typeof yujin2);
 
 
 // 3) function(생성자 함수)을 사용해서 객체 생성
@@ -38,5 +42,6 @@ function IdolGenerate(name, year){
 
 const gaeul = new IdolGenerate('가을', 2002);
 console.log(gaeul);
+console.log(typeof gaeul);
 
 
