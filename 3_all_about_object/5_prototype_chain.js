@@ -1,8 +1,30 @@
 
+
+// prototype : 상속해줄 수 있는 변수와 메소드들이 모여있는 별도의 객체.
+// 객체에 들어있는 변수와 메소드들은 객체마다 다른 메모리에 저장된다.
+// 하지만 prototype에 들어있는 변수와 메소드들은
+// 서로 다른 객체도 같은 메모리 안에 있는 변수와 메소드들을 참조한다.
+// 모든 함수(클래스)는 자신의 prototype 객체를 함께 생성하지만,
+// 객체가 생성될때에는 자신의 prototype 객체가 생성되지 않는다.
+
+
+// __proto__ : 자신이 참조하고 있는 prototype 객체를 호출하는 명령어.
+// 객체의 경우 자신을 생성한 함수의 prototype 객체를 __proto__로 가지고,
+// 함수(클래스)의 경우
+// 자신을 존재 가능하게 하거나 자신의 부모 역할을 하는 함수(클래스)의
+// prototype 객체를 __proto__로 가진다.
+
+
+// prototype chain : prototype은 계층적으로 연결되어있다.
+// 객체에서 호출한 함수 및 메서드가 객체에 존재하지 않으면
+// 객체의 prototype에서 찾고자 하는 것을 찾고,
+// 그래도 존재하지 않으면 해당 prototype이 참조하는 상위 prototype에서 찾는다.
+// 찾는데에 성공할때까지 탐색은 최상위 prototype인 Object.prototype까지 이어진다. 
+
+
 const testObj = {};
 
-// __proto__ : 모든 객체에 존재하는 proterty이다.
-// class 강의에서 배울 때 부모 클래스를 가리킨다.
+
 
 console.log(testObj.__proto__);  // [Object: null prototype] {}
 
@@ -18,28 +40,37 @@ console.dir(IdolModel.prototype, {showHidden: true});
 
 
 // circular reference
+// 원본 객체와 그 객체의 prototype 객체는 서로 순환참조를 이룬다.
+// IdolModel의 prototype은 IdolModel.prototype이고,
+// IdolModel.prototype의 생성자(constructor)는 IdolModel이다.
 console.log(IdolModel.prototype.constructor === IdolModel);  // true
 console.log(IdolModel.prototype.constructor.prototype === IdolModel.prototype);  // true
 
 
 const yujin = new IdolModel('안유진', 2003);
 
-console.log(yujin.__proto__);
+// yujin이 참조하고 있는 prototype은 IdolModel.prototype이다.
 console.log(yujin.__proto__ === IdolModel.prototype);  // true
 
-
+// testObj가 참조하고 있는 prototype은 Object.prototype이다.
 console.log(testObj.__proto__ === Object.prototype);  // true
 
+// IdolModel의 부모 prototype은 Function.prototype이다.
 console.log(IdolModel.__proto__ === Function.prototype);  // true
 
 console.log(Function.prototype.__proto__ === Object.prototype); // true
 
 console.log(IdolModel.prototype.__proto__ == Object.prototype);  // true
 
+// prototype chain 덕분에
+// yujin객체에서도 Object.property에 들어있는 함수 toString()을 호출할 수 있다.
 console.log(yujin.toString());  // [object Object]
 console.log(Object.prototype.toString());  // [object Object]
 
 console.log('--------------------------');
+
+
+// prototype의 유용성 : 메모리 절약
 
 
 function IdolModel2(name, year){
@@ -83,7 +114,7 @@ const wonyoung3 = new IdolModel3('장원영', 2004);
 // 객체들이 하나의 메모리 주소에 있는 함수를 참조함으로써
 // 같은 값으로 취급된다.
 // 각 객체에 들어있는 함수를 참조하는것이 아니라
-// IdolModel3.prototype이라는 부모클래스에 있는 함수를 상속받기 때문.
+// IdolModel3.prototype에 있는 함수를 상속받기 때문.
 console.log(yujin3.sayHello === wonyoung3.sayHello);  // true
 console.log(yujin3.hasOwnProperty('sayHello'));  // false
 
